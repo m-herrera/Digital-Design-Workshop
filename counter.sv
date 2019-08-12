@@ -2,16 +2,16 @@ module counter
   #(   parameter N = 2)   ( input               clk,
     input               reset,
      output   reg [N-1:0] out);
-reg [3:0] counter_up;
-
+initial
+out=0;
 // up counter
 always @(posedge clk or posedge reset)
 begin
 if(reset)
- counter_up <= 4'd0;
+ out <= 0;
 else
- counter_up <= counter_up + 4'd1;
+ out <= out + 1;
 end 
-assign out = counter_up;
+
 endmodule
  
