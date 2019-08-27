@@ -1,3 +1,5 @@
+-- synthesis VHDL_INPUT_VERSION VHDL_2008 
+
 library IEEE; use IEEE.STD_LOGIC_1164.all;
 
 entity full_adder is
