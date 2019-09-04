@@ -3,6 +3,11 @@ module overflow_flag(input logic msb_num1, input logic msb_num2,
 								output logic overflow);
 
 
+logic addition_substraction;
+logic sign_change;
+logic sign_contradiction;
+ 								
+								
 assign addition_substraction = control[3:1] == 3'b100;
 //100 represents addition or substraction
 
