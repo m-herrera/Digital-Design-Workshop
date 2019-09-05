@@ -1,5 +1,5 @@
-module overflow_flag(input logic msb_num1, input logic msb_num2, 
-								input logic[3:0] control, input logic msb_result,
+module overflow_flag(input logic msb_num1, msb_num2, msb_result,
+								input logic[3:0] control, 
 								output logic overflow);
 
 

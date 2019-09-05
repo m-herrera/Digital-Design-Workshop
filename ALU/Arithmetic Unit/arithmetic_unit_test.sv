@@ -17,7 +17,7 @@ module arithmetic_unit_test();
 	
 	
 	select = 2; #10;
-	assert(out === 8'd11) else $error("Shift 1 failed");
+	assert(out === 8'd0) else $error("Shift 1 failed");
 	
 	a = 8'd240;
 	b = 8'd2;
