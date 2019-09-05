@@ -1,4 +1,4 @@
-module Cshift#(parameter N=8)(input logic [N-1:0] a ,
+module circular_shift#(parameter N=8)(input logic [N-1:0] a ,
 input logic [2:0] b,
 output logic [N-1:0] z);
 always_comb begin

@@ -13,12 +13,12 @@ module mux6
 	begin
 		case(select)
 			3'd0 : out = num1;
-			3'd1 : out = num1;
-			3'd2 : out = num1;
-			3'd3 : out = num1;
+			3'd1 : out = num2;
+			3'd2 : out = num3;
+			3'd3 : out = num4;
 			3'd4 : out = num5;
 			3'd5 : out = num6;
-			default : out = {N{1'b0}};
+			default : out = 'z;
 		endcase
 	end
 		
