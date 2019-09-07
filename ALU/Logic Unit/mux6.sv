@@ -1,11 +1,5 @@
-module mux6 
-	#(parameter N)
-		(input logic[N-1:0] num1,
-		input logic[N-1:0] num2,
-		input logic[N-1:0] num3,
-		input logic[N-1:0] num4,
-		input logic[N-1:0] num5,
-		input logic[N-1:0] num6,
+module mux6 #(parameter N)
+		(input logic[N-1:0] num1, num2, num3, num4, num5, num6,
 		input logic[2:0] select,
 		output logic[N-1:0] out);
 	
