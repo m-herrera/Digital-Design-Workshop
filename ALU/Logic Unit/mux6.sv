@@ -4,7 +4,6 @@ module mux6 #(parameter N)
 		output logic[N-1:0] out);
 	
 	always_comb
-	begin
 		case(select)
 			3'd0 : out = num1;
 			3'd1 : out = num2;
@@ -14,6 +13,5 @@ module mux6 #(parameter N)
 			3'd5 : out = num6;
 			default : out = 'z;
 		endcase
-	end
 		
 endmodule 

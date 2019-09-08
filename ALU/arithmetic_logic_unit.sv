@@ -12,7 +12,7 @@ module arithmetic_logic_unit #(parameter N=8)
 	mux2 #(N) MainMux(logic_out, arithmetic_out, ALUControl[3], out);
 	negative_flag Negative(out[N-1], ALUControl[3], negative);
 	zero_flag #(N) Zero(out, zero);
-	carry_flag Carry(carryWire, ALUControl[2:0], carry_out);
-	overflow_flag Overflow(a[N-1], b[N-1], out[N-1], ALUControl[3:0], overflow);
+	carry_flag Carry(carryWire, ALUControl[3:1], carry_out);
+	overflow_flag Overflow(a[N-1], b[N-1], out[N-1], ALUControl, overflow);
 
 endmodule
