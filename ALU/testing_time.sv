@@ -1,27 +1,28 @@
-module testing_time #(parameter N=258)
-	(input logic [1:0] a, b,
+module testing_time #(parameter N=64)
+	(input logic [7:0] a, b,
 	input logic [3:0] ALUControl,
 	input logic clock,
 	output logic [N-1:0] out,
 	output logic negative, zero, carry_out, overflow);
 	
-reg [N-1:0] c;
-reg [N-1:0] d;
+logic [N-1:0] c, d, out1;
+logic negative1, zero1, carry_out1, overflow1;
 	
 always@ (posedge clock)
 begin
-c<=a;
-d<=b;
-
+	c <= {(N/8){a}};
+	d <= {(N/8){b}};
 end
-arithmetic_logic_unit #(N) alit(c,d,ALUControl,out2,negative1, zero1, carry_out1, overflow1);
-always@ (posedge ~clock)
+
+arithmetic_logic_unit #(N) alit(c,d,ALUControl,out1,negative1, zero1, carry_out1, overflow1);
+
+always@ (negedge clock)
 begin
-out= out2 ;
-negative=negative1;
-zero=zero1;
-carry_out=carry_out1;
-overflow=overflow1;
+	out <= out1;
+	negative <= negative1;
+	zero <= zero1;
+	carry_out <= carry_out1;
+	overflow <= overflow1;
 end
 
 endmodule 
