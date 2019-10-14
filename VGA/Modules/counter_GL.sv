@@ -1,4 +1,4 @@
-module counter #(parameter bits=4)(input logic reset, 
+module counter_GL #(parameter bits=4)(input logic reset, 
 												input logic clk,enable, 
 												output logic[bits-1:0] count);
 reg [bits-1:0] registro = 0;												

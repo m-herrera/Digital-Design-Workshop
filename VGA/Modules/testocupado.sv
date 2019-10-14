@@ -1,11 +1,10 @@
-module testocupado();
-logic [1:0] a;
-logic b;
-ocupado modulo(a,b);
+module testOcupado();
+logic [1:0] mem;
+logic out;
+ocupado UUT(mem,out);
 initial begin
-a=2'b00;
-#10 a =2'b10;
-#10 a =2'b01;
-#10 a =2'b00;
+mem = 'b01;
+#10 mem = 'b10;
+#10 mem = 'b11;
 end
 endmodule
