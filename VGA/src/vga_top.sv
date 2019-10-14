@@ -10,6 +10,7 @@ module vga_top(
 	
 	logic[9:0] row;
 	logic[9:0] column;
+	logic[3:0] player_address;
 	
 	clock_divider Clk(clk, rst, 2'b10, clk_25);
 
@@ -17,8 +18,7 @@ module vga_top(
 	
 	synchronizer #(9) Sync(clk_25, rst, 10'd96, 10'd2, 10'd793, 10'd525, column, row, hsync, vsync);
 	
-	renderer Rend(clk, rst, column, row, vga_r, vga_g, vga_b, blank, sync);
-	 
+	renderer Rend(clk_25, rst, column, row, player_address, vga_r, vga_g, vga_b, blank, sync);
 	
 	
 
