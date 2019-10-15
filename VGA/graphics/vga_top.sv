@@ -1,6 +1,6 @@
 module vga_top(input clk, rst, 
 			   output logic hsync, vsync, blank, sync, vga_clk,
-			   output logic[0:7] vga_r, vga_g, vga_b);
+			   output logic[7:0] vga_r, vga_g, vga_b);
 			
 	logic clk_25;
 	clk_divider Clk(clk, rst, clk_25);

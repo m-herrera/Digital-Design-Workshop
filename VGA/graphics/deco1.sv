@@ -1,11 +1,11 @@
-module deco(input logic[2:0] color_in, 
+module deco1(input logic[2:0] color_in, 
 			output logic [7:0]vga_r, vga_g, vga_b);
 
 	logic[23:0] color_out;
 	
-	assign vga_r = color_out[23:16];
+	assign vga_b = color_out[23:16];
 	assign vga_g = color_out[15:8];
-	assign vga_b = color_out[7:0];
+	assign vga_r = color_out[7:0];
 	
 	always_comb
 		case(color_in)
