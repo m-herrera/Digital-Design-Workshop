@@ -1,7 +1,6 @@
 module debouncer#(parameter imm = 200,N = 8)(input logic clk,boton,output logic salida);
-
-logic salidaFF1, salidaFF2, salidaXor;
-
+logic salidaFF1,salidaFF2,salidaXor,enable;
+ logic [7:0] conteo;
 FF #(1) flipflopD1(clk,0,1,boton,salidaFF1);
 FF #(1) flipflopD2(clk,0,1,salidaFF1,salidaFF2);
 xor_gate gate(salidaFF1,salidaFF2,salidaXor);
