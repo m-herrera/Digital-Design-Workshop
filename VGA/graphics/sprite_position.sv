@@ -1,24 +1,30 @@
-module sprite_position(input logic x_increment, y_increment, rst,
+module sprite_position(input logic[9:0] pixelx, pixely, 
 					   output logic[9:0] posx, posy,
 					   output logic[3:0] player_address);
-
-
-	logic x_rst, y_rst;
-	logic[1:0] x_count, y_count;
-	
-	assign x_rst = (rst || (x_count == 2'b10));
-	assign y_rst = (rst || (y_count == 2'b10));
-	
-	counter #(2) posx_counter(x_increment, x_rst, 1'b1, x_count);
-	counter #(2) posy_counter(y_increment, y_rst, 1'b1, y_count);
 	
 	
-	assign posx = (10'd73 + x_count * 10'd210);
-	assign posy = (10'd47 + y_count * 10'd158);
-	
+	logic[1:0] x_index, y_index;
 	
 	always_comb
-		case({y_count,x_count})
+	begin
+		if(pixelx <= 210)
+			x_index = 2'b00;
+		else if(pixelx <= 423)
+			x_index = 2'b01;
+		else
+			x_index = 2'b10;
+		
+		if(pixely <= 157)
+			y_index = 2'b00;
+		else if(pixely <= 317)
+			y_index = 2'b01;
+		else
+			y_index = 2'b10;
+	
+	end
+	
+	always_comb
+		case({y_index,x_index})
 			4'b0000 : player_address = 4'd0;
 			4'b0001 : player_address = 4'd1;
 			4'b0010 : player_address = 4'd2;
@@ -31,6 +37,9 @@ module sprite_position(input logic x_increment, y_increment, rst,
 			default : player_address = 4'd0;
 			
 		endcase
+		
+	assign posx = (10'd73 + x_index * 10'd210);
+	assign posy = (10'd47 + y_index * 10'd158);
 
 
 endmodule 
