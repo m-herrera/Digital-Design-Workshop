@@ -1,17 +1,13 @@
-module counter_GL #(parameter bits=4)(input logic reset, 
-												input logic clk,enable, 
-												output logic[bits-1:0] count);
-reg [bits-1:0] registro = 0;												
-	always@ (posedge clk or posedge reset)
-    if (reset)
-	 begin
-	 registro = 0;
-      count <= registro;
-		end
-    else
-      if (enable)
-		begin
-		registro = registro+1;
-        count<=registro;
-		  end
+module counter_GL #(parameter bits=4)
+					(input clk, rst, enable, 
+					 output logic[bits-1:0] count);
+	
+always_ff @(posedge clk, posedge rst)
+    if (rst)
+		count <= 'b0;
+    else if (enable)
+        count <= count + 1'b1;
+	else
+		count <= count;
+
 endmodule 

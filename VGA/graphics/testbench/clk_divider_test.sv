@@ -1,9 +1,10 @@
+`timescale 10ns/10ns
 module clk_divider_test();
 
 
 	logic clk_in, clk_out, rst;
 	
-	clk_divider DUT(clk_in, rst, clk_out);
+	clk_divider #(20) DUT(clk_in, rst, clk_out);
 	
 	
 	initial begin
@@ -15,6 +16,6 @@ module clk_divider_test();
 	end
 	
 	always
-		#10 clk_in <= !clk_in;
+		#1 clk_in <= !clk_in;
 	
 endmodule  

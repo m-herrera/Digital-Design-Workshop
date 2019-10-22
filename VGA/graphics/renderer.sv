@@ -28,7 +28,7 @@ module renderer(input clk, rst,
 	assign background_color = {8'd165, 8'd196, 8'd212};
 	
 	
-	altered_mux4to1(is_selection_visible, is_sprite_visible, is_line_visible,
+	altered_mux4to1 Mux(is_selection_visible, is_sprite_visible, is_line_visible,
 					selection_color, sprite_color, line_color, background_color,
 					output_color);
 			

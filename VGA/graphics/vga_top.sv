@@ -1,6 +1,9 @@
-module vga_top(input clk, rst, 
+module vga_top(input clk, rst,
+			   input logic [3:0] sel_position,
+			   input logic[1:0] player,
 			   output logic hsync, vsync, blank, sync, vga_clk,
-			   output logic[7:0] vga_r, vga_g, vga_b);
+			   output logic[7:0] vga_r, vga_g, vga_b,
+			   output logic[3:0] player_address);
 
 	logic clk_25;
 	clk_divider Clk(clk, rst, clk_25);
@@ -13,23 +16,7 @@ module vga_top(input clk, rst,
 	synchronizer Sync(clk_25, rst, pixelx, pixely, hsync, vsync);
 
 
-	logic[3:0] player_address;
-	logic[1:0] player;
-	always_comb
-		case(player_address)
-			4'b0000: player = 2'b00;
-			4'b0001: player = 2'b01;
-			4'b0010: player = 2'b10;
-			4'b0011: player = 2'b10;
-			4'b0100: player = 2'b10;
-			4'b0101: player = 2'b01;
-			4'b0110: player = 2'b10;
-			4'b0111: player = 2'b01;
-			4'b0000: player = 2'b10;
-			default: player = 2'b00;
-		endcase
-
-	renderer Rend(clk_25, rst, pixelx, pixely, 4'd3, player, player_address, vga_r, vga_g, vga_b, blank, sync);
+	renderer Rend(clk_25, rst, pixelx, pixely, sel_position, player, player_address, vga_r, vga_g, vga_b, blank, sync);
 
 
 endmodule

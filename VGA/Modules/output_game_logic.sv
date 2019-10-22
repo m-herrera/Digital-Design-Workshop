@@ -1,4 +1,4 @@
-module uoutput_Gamelogic(input [2:0] estado,output escritura,selrandom,resetTimer,resetLogGame,turno);
+module output_game_logic(input [2:0] estado,output escritura,selrandom,resetTimer,resetLogGame,turno);
 
 always_comb
 begin
