@@ -14,12 +14,12 @@ module tic_tac_top(input clk, hrd_rst, start, move, select,
 				   
 	// game state
 	logic win, full;
-	game_state_memory Mem(clk, rst, w_e, player_address, pos, pos, cur_player, player, state, win, full);
+	game_state_memory Mem(clk, rst, w_e, player_address, pos, cur_player, player, state, win, full);
 	
 	// manages graphics
 	logic[3:0] player_address;
 	vga_top Graphics(clk, hrd_rst, pos, player, hsync, vsync, blank, sync, vga_clk, vga_r, vga_g, vga_b, player_address);
 	
-	assign light = !select;
+	assign light = win;
 
 endmodule 

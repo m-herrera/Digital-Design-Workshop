@@ -5,7 +5,7 @@ module game_state_memory_test();
 	logic[3:0] player_address, pos;
 	logic[1:0] cur_player, player, state;
 	
-	game_state_memory DUT(clk, rst, w_e, player_address, pos, pos, cur_player, player, state, win, full);
+	game_state_memory DUT(clk, rst, w_e, player_address, pos, cur_player, player, state, win, full);
 
 	
 	initial begin
