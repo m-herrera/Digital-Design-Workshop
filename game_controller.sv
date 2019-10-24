@@ -10,7 +10,7 @@ module game_controller(input clk, hrd_rst, start, move_b, select, win, full,
 	
 	
 	// timeout 30s
-	logic timeout, rst_timer;
+	logic rst_timer;
 	timer Time(clk, rst_timer, timeout);
 	
 	

@@ -9,12 +9,14 @@ module tic_tac_top(input clk, hrd_rst, start, move, select,
 	logic[3:0] pos;
 	logic[1:0] cur_player, player;
 	logic [1:0] state;
-	game_controller Game(clk, hrd_rst, !start, !move, !select, win, full, state, rst, w_e, pos, cur_player);
+	game_controller Game(vga_clk, hrd_rst, !start || hrd_rst, !move, !select, win, full, state, rst, w_e, pos, cur_player);
 	
 				   
 	// game state
-	logic win, full;
-	game_state_memory Mem(clk, rst, w_e, player_address, pos, cur_player, player, state, win, full);
+	logic win, full, mem_rst;
+	
+	assign mem_rst = rst;
+	game_state_memory Mem(clk, mem_rst, w_e, player_address, pos, cur_player, player, state, win, full);
 	
 	// manages graphics
 	logic[3:0] player_address;

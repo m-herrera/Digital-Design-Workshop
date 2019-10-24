@@ -5,9 +5,9 @@ module timer #(B=30)(input logic clk, reset,
 	logic [4:0] count;
 	
 	
-	clk_divider #(27) Clk(clk, 1'b0, sec_clk);
+	clk_divider #(25) Clk(clk, reset, sec_clk);
 	
-	assign timeout = (count >= B);
+	assign timeout = (count >= 5'd30);
 	assign enable = !timeout;
 	
 	counter_GL #(5) Time(sec_clk, reset, enable, count);

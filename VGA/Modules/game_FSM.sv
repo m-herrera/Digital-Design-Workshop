@@ -13,15 +13,15 @@ module game_FSM(input clk, hrd_rst, start, select, timeout, busy, win, full,
 			
 	always_comb
 		case (state)
-			3'd0	: next = start ? 'd1 : 'd0; 
-			3'd1	: next = 'd2;
-			3'd2	: begin if(timeout) next = 'd5; else if (select) next = 'd3; else next = 'd2; end
-			3'd3	: next = busy ? 'd2 : 'd4;
-			3'd4	: next = (win || full) ? 'd7 : 'd1;
-			3'd5	: next = 'd6;
-			3'd6	: next = busy ? 'd5 : 'd4;
-			3'd7	: next = start ? 'd0 : 'd7;
-			default : next = 'd0;
+			3'd0	: next = start ? 3'd1 : 3'd0; 
+			3'd1	: next = 3'd2;
+			3'd2	: begin if(timeout) next = 3'd5; else if (select) next = 3'd3; else next = 3'd2; end
+			3'd3	: next = busy ? 3'd2 : 3'd4;
+			3'd4	: next = 3'd7;
+			3'd5	: next = 3'd6;
+			3'd6	: next = busy ? 3'd2 : 3'd4;
+			3'd7	: begin if (start) next = 3'b0; else if (win || full) next = 3'd7; else next = 3'b1; end
+			default : next = 3'd0;
 		endcase
 		
 		
