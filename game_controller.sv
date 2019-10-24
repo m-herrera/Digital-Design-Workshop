@@ -1,6 +1,6 @@
-module game_controller(input clk, hrd_rst, start, move_b, select, win, full,
+module game_controller(input clk, hrd_rst, start, move_b, select, show_winner, win, full,
 						input logic [1:0] state,
-						output logic rst, w_e,
+						output logic rst, w_e, winner_s,
 						output logic[3:0] pos, 
 						output logic [1:0] player);
 
@@ -36,8 +36,8 @@ module game_controller(input clk, hrd_rst, start, move_b, select, win, full,
 	busy Check(state, is_busy);
 
 	
-	game_FSM Game(clk, hrd_rst, start, select, timeout, is_busy, win, full,
-					gen_rand, toggle_player, w_e, rst_timer, rst);
+	game_FSM Game(clk, hrd_rst, start, select, show_winner, timeout, is_busy, win, full,
+					gen_rand, toggle_player, w_e, rst_timer, rst, winner_s);
 	
 	
 

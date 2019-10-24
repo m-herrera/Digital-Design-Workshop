@@ -1,14 +1,12 @@
 module game_state_memory(input logic clk, reset, we,
 						 input logic[3:0] addr1, addr2,
 						 input logic[1:0] data_in,
-						 output logic[1:0] data_out, data_out2,
+						 output logic[1:0] data_out, data_out2, winner,
 						 output logic[3:0] pos1, pos2, pos3,
 						 output logic win, full);
 						 
 	logic[1:0] memory [8:0];
-	
-	logic[1:0] winner;
-	
+		
 	assign win = winner == 2'b01 || winner == 2'b10;
 	
 	always_ff @(posedge clk, posedge reset)
@@ -22,6 +20,10 @@ module game_state_memory(input logic clk, reset, we,
 			memory[6] <= '0;
 			memory[7] <= '0;
 			memory[8] <= '0;
+			pos1 = 4'd15;
+			pos2 = 4'd15;
+			pos3 = 4'd15;
+			winner = 'b11;
 			end
         else if(we)
 		begin
@@ -154,8 +156,10 @@ module game_state_memory(input logic clk, reset, we,
 					memory[3] != 'b0 &&
 					memory[4] != 'b0 &&
 					memory[5] != 'b0 &&
+					memory[6] != 'b0 &&
 					memory[7] != 'b0 &&
 					memory[8] != 'b0);
+			
 		end
 		else
 		begin
@@ -289,6 +293,7 @@ module game_state_memory(input logic clk, reset, we,
 					memory[3] != 'b0 &&
 					memory[4] != 'b0 &&
 					memory[5] != 'b0 &&
+					memory[6] != 'b0 &&
 					memory[7] != 'b0 &&
 					memory[8] != 'b0);
 			
