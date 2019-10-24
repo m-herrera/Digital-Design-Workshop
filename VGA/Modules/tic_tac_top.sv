@@ -9,7 +9,8 @@ module tic_tac_top(input clk, hrd_rst, start, move, select, show_winner,
 	logic[3:0] pos, pos1, pos2, pos3;
 	logic[1:0] cur_player, player;
 	logic [1:0] state;
-	game_controller Game(vga_clk, hrd_rst, !start || hrd_rst, !move, !select, !show_winner, win, full, state, rst, w_e, winner_s, pos, cur_player);
+	logic[4:0] _time;
+	game_controller Game(vga_clk, hrd_rst, !start || hrd_rst, !move, !select, !show_winner, win, full, state, rst, w_e, winner_s, pos, cur_player, _time);
 	
 				   
 	// game state
@@ -20,7 +21,7 @@ module tic_tac_top(input clk, hrd_rst, start, move, select, show_winner,
 	
 	// manages graphics
 	logic[3:0] player_address;
-	vga_top Graphics(clk, hrd_rst, rst, winner_s, pos, pos1, pos2, pos3, player, winner, hsync, vsync, blank, sync, vga_clk, vga_r, vga_g, vga_b, player_address);
+	vga_top Graphics(clk, hrd_rst, rst, winner_s, pos, pos1, pos2, pos3, player, winner, _time, hsync, vsync, blank, sync, vga_clk, vga_r, vga_g, vga_b, player_address);
 	
 	assign light = win;
 

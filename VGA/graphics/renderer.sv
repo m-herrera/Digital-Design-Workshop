@@ -2,6 +2,7 @@ module renderer(input clk, rst, menu, winner_s,
 				input logic [9:0] pixelx, pixely,
 				input logic [3:0] sel_position, pos1, pos2, pos3,
 				input logic [1:0] player, winner,
+				input logic [4:0] _time,
 				output logic [3:0] player_address,
 				output logic [7:0]vga_r, vga_g, vga_b,
 				output logic blank, sync);
@@ -13,9 +14,9 @@ module renderer(input clk, rst, menu, winner_s,
 	
 	
 	
-	logic[23:0] background_color, line_color, sprite_color, selection_color, winner_color, output_color;
+	logic[23:0] background_color, line_color, sprite_color, selection_color, time_color, output_color;
 	
-	logic is_line_visible, is_sprite_visible, is_selection_visible, is_winner_visible;
+	logic is_line_visible, is_sprite_visible, is_selection_visible, is_winner_visible, is_time_visible;
 	
 	line_renderer Lines(pixelx, pixely, is_line_visible, line_color);
 					
@@ -37,6 +38,10 @@ module renderer(input clk, rst, menu, winner_s,
 	
 	winner_background Winner(pixelx, pixely, pos1, pos2, pos3, is_winner_visible);
 
+	time_renderer Time(pixelx, pixely, _time, is_time_visible);
+	
+	
+	assign time_color = {8'd230, 8'd160, 8'd20}; 
 	
 	always_comb
 		if (is_winner_visible && !winner_s)
@@ -45,8 +50,8 @@ module renderer(input clk, rst, menu, winner_s,
 			background_color = {8'd165, 8'd196, 8'd212};
 			
 			
-	altered_mux4to1 Mux(menu, is_selection_visible, is_sprite_visible, is_line_visible,
-					selection_color, sprite_color, line_color, background_color,
+	altered_mux4to1 Mux(menu, is_selection_visible, is_sprite_visible, is_time_visible, is_line_visible,
+					selection_color, sprite_color, time_color, line_color, background_color,
 					output_color);
 			
 	

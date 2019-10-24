@@ -2,7 +2,8 @@ module game_controller(input clk, hrd_rst, start, move_b, select, show_winner, w
 						input logic [1:0] state,
 						output logic rst, w_e, winner_s,
 						output logic[3:0] pos, 
-						output logic [1:0] player);
+						output logic [1:0] player,
+						output logic [4:0] _time);
 
 	// selected position from button
 	logic[3:0] sel_pos, rand_pos;
@@ -11,7 +12,7 @@ module game_controller(input clk, hrd_rst, start, move_b, select, show_winner, w
 	
 	// timeout 30s
 	logic rst_timer, timeout;
-	timer Time(clk, rst_timer, timeout);
+	timer Time(clk, rst_timer, timeout, _time);
 	
 	
 	// generate_random if timeout
