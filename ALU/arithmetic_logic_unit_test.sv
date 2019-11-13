@@ -7,9 +7,9 @@ module arithmetic_logic_unit_test();
 	initial begin
 	a = 8'b01001100;
 	b = 8'b01100101;
-	select=2;
-	#20 select=1;
-	#20 select=0;
-	#20 select=3;
+	#10 select =2'b10;
+	#10 select =2'b01;
+	#10 select =2'b00;
+	#10 select =2'b11;
 	end
 endmodule
