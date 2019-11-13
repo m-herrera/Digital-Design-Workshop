@@ -1,4 +1,4 @@
-module adder #(parameter N=4)
+module adderv2 #(parameter N=4)
 					(input logic[N-1:0] a, b,
 					input logic cin,
 					output logic[N-1:0] s,

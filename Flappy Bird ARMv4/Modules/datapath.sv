@@ -33,5 +33,5 @@ extend ext(Instr[23:0], ImmSrc, ExtImm);
 
 // ALU logic
 mux2 #(32) srcbmux(WriteData, ExtImm, ALUSrc, SrcB);
-alu alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags);
+arithmetic_logic_unit #(32) alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags[0],ALUFlags[1],ALUFlags[2],ALUFlags[3]);
 endmodule

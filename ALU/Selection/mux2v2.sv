@@ -1,4 +1,4 @@
-module mux2 
+module mux2v2 
 	#(parameter N)
 		(input logic[N-1:0] num1,
 		input logic[N-1:0] num2,

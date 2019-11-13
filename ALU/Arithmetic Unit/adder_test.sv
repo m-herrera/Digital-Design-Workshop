@@ -1,8 +1,8 @@
-module adder_test();
+module adderv2_test();
 	logic [3:0] a, b, s;
 	logic cin, cout;
 	
-	adder #(4) DUT(a, b, cin, s, cout);
+	adderv2 #(4) DUT(a, b, cin, s, cout);
 	
 	initial begin
 		a = 4; b = 3; cin=0;#10;
