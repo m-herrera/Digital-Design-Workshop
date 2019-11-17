@@ -1,3 +1,4 @@
+//Realiza la decodificacion de la instruccion, asignando a los muxes valores
 module controller(input logic clk, reset,
 						input logic [31:12] Instr,
 						input logic [3:0] ALUFlags,

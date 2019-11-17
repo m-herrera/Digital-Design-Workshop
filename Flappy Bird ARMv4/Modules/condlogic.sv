@@ -11,12 +11,11 @@ logic [3:0] Flags;
 logic CondEx;
 
 flopenr #(2)flagreg1(clk, reset, FlagWrite[1],
-							ALUFlags[3:2], Flags[3:2]);
+							ALUFlags[3:2], Flags[3:2]); //Registro que guarda flags de la instruccion anterior
 
-flopenr #(2)flagreg0(clk, reset, FlagWrite[0],
+flopenr #(2)flagreg0(clk, reset, FlagWrite[0], //Registro que guarda flags de la instruccion anterior
 ALUFlags[1:0], Flags[1:0]);
-// write controls are conditional
-
+// asigna condiciones en caso de que se cumpla
 condcheck cc(Cond, Flags, CondEx);
 assign FlagWrite = FlagW & {2{CondEx}};
 assign RegWrite = RegW & CondEx;
