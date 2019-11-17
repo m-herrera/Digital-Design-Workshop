@@ -1,14 +1,11 @@
-module ps2controller(input logic clk, rst, send,
-							input logic[7:0] command,
-							output logic received, start_enable, count_enable, count_rst,
-							output logic [7:0] received_data, data,
-							input logic PS2_CLK, PS2_DAT,
-							output logic[3:0] count);
+module ps2controller(input logic rst, read_ack, PS2_CLK, PS2_DAT,
+							output logic received,
+							output logic [7:0] received_data);
 							
 
-	//logic start_enable, count_enable, count_rst;							
-	//logic[3:0] count;
-	//logic[7:0] data;
+	logic start_enable, count_enable, count_rst;							
+	logic[3:0] count;
+	logic[7:0] data;
 	
 	assign start_enable = !PS2_DAT && !count_enable;
 								
@@ -22,8 +19,9 @@ module ps2controller(input logic clk, rst, send,
 				count_rst = 1;
 				received <= 0;
 				data <= '0;
-				
 				end
+			if(read_ack)
+				received_data <= '0;
 			if(start_enable)
 				count_enable <= 1;
 			case(count)
@@ -36,10 +34,10 @@ module ps2controller(input logic clk, rst, send,
 				4'd6:data[5]<=PS2_DAT;
 				4'd7:data[6]<=PS2_DAT;
 				4'd8:data[7]<=PS2_DAT;
-				4'd9:received<=1'b1; //Parity bit
+				4'd9:begin received<=1'b1; received_data <= data; end //Parity bit
 				4'd10:begin received <= 0; count_rst <= 1; count_enable <= 0; end //Ending bit
 			endcase
 		end
-	always@(posedge received)
-		received_data <= data;
+		
+		
 endmodule
