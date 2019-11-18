@@ -17,6 +17,6 @@ ps2controller Keyboard(.rst(rst), .read_ack(ps2_read_ack), .PS2_CLK(PS2_CLK), .P
 
 vram Video(clk, rst, vram_we, vram_address, vram_data, vram_read, vram_output);
 
-ram Memory(ram_address[11:0], clk, ram_data, ram_we, ram_read);
+ram Memory(clk, rst, ram_we, ram_address, ram_data, ram_read);
 
 endmodule

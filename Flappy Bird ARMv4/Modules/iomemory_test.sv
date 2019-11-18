@@ -1,5 +1,3 @@
-`timescale 1ps/1ps
-
 module iomemory_test();
 
 	logic PS2_CLK, PS2_DAT, clk, rst, write_enable;
