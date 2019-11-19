@@ -1,6 +1,6 @@
-module address_decoder #(parameter N=32)(input logic write_enable,
+module address_decoder #(parameter N=32)(input logic write_enable, vsync, 
 													input logic[N-1:0] address, ps2_read, ram_read, vram_read, data_input,
-													output logic ram_we, vram_we, ps2_read_ack,
+													output logic ram_we, vram_we, ps2_read_ack, vsync_read_ack,
 													output logic[N-1:0] ram_address, vram_address, ram_data, vram_data, data_output);
 													
 
@@ -11,6 +11,7 @@ always_comb
 			ram_we = 0;
 			vram_we = 0;
 			ps2_read_ack = 0;
+			vsync_read_ack = 0;
 			ram_data = 'z;
 			vram_data = 'z;
 			if(address <'h4000)
@@ -32,6 +33,12 @@ always_comb
 					vram_address = (address - 'h4004) / 4;
 					data_output = vram_read;
 				end
+			else if(address >= 4100 && address < 'h4104)
+				begin
+					ram_address = 'z;
+					vram_address = 'z;
+					data_output = vsync;
+				end
 			else
 				begin
 					ram_address = 'z;
@@ -51,7 +58,7 @@ always_comb
 					vram_data = 'z;
 					vram_we = 0;
 					ps2_read_ack = 0;
-					
+					vsync_read_ack = 0;
 				end
 			else if(address >= 'h4000 && address < 'h4004)
 				begin
@@ -62,6 +69,7 @@ always_comb
 					vram_data = 'z;
 					vram_we = 0;
 					ps2_read_ack = 1;
+					vsync_read_ack = 0;
 				end
 			else if(address >= 'h4004 && address < 'h4100)
 				begin
@@ -72,6 +80,18 @@ always_comb
 					vram_data = data_input;
 					vram_we = 1;
 					ps2_read_ack = 0;
+					vsync_read_ack = 0;
+				end
+			else if(address >= 4100 && address < 'h4104)
+				begin
+					ram_address = 'z;
+					ram_data = 'z;
+					ram_we = 0;
+					vram_address = 'z;
+					vram_data = 'z;
+					vram_we = 0;
+					ps2_read_ack = 0;
+					vsync_read_ack = 1;
 				end
 			else
 				begin
@@ -82,6 +102,7 @@ always_comb
 					vram_data = 'z;
 					vram_we = 0;
 					ps2_read_ack = 0;
+					vsync_read_ack = 0;
 				end
 		end
 	endcase
