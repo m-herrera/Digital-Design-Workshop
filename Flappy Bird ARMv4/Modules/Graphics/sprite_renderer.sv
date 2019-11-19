@@ -1,6 +1,6 @@
 module sprite_renderer(input logic clk, rst,
 					   input logic[9:0] pixelx, pixely,
-					   input logic[10:0] posx1, posy1, posx2, posy2, posx3, posy3, posx4, posy4, posx5, posy5, 
+					   input logic[9:0] posx1, posy1, posx2, posy2, posx3, posy3, posx4, posy4, posx5, posy5, 
 					   output logic[23:0] out_color);
 
 
@@ -33,6 +33,9 @@ module sprite_renderer(input logic clk, rst,
 	end
 	
 	logic[2:0] flappy_color, UPcolor, DOWNcolor;
+//	assign flappy_color = 'd1;
+//	assign UPcolor = 'd2;
+//	assign DOWNcolor = 'd3;
 	rom Sprite1_rom(address, clk, flappy_color);
 	rom2 Sprite2_rom(addressUP, clk, UPcolor);
 	rom3 Sprite3_rom(addressDOWN, clk, DOWNcolor);
