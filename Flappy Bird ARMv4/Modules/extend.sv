@@ -1,10 +1,13 @@
 module extend(input logic [23:0] Instr,
 					input logic [1:0] ImmSrc,
 					output logic [31:0] ExtImm);
+
+logic[31:0] newImm;
+circular_shift Rot({24'b0, Instr[7:0]}, Instr[11:8], newImm);
 always_comb
 	case(ImmSrc)
 		// sin signo de 8 bits
-		2'b00: ExtImm = {24'b0, Instr[7:0]};
+		2'b00: ExtImm = newImm;
 		// sin signo
 		2'b01: ExtImm = {20'b0, Instr[11:0]};
 		// complenta en caso de branch

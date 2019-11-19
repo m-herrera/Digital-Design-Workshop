@@ -1,10 +1,13 @@
+`timescale 1 ps / 1 ps
+
+
 module testbench();
 logic clk, reset, PS2_CLK, PS2_DAT;
-logic [31:0] WriteData, DataAdr,PC,Instr;
-logic MemWrite;
-logic [9:0][31:0] vram_parallel_output;
+logic hsync, vsync, blank, sync, vga_clk; 
+logic[7:0] vga_r, vga_g, vga_b;
+
 // instantiate device to be tested
-top dut(clk, reset, PS2_CLK, PS2_DAT, WriteData, DataAdr,PC,Instr, MemWrite, vram_parallel_output);
+top dut(clk, reset, PS2_CLK, PS2_DAT, hsync, vsync, blank, sync, vga_clk, vga_r, vga_g, vga_b);
 // initialize test
 initial
 begin
