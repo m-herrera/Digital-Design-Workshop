@@ -19,6 +19,19 @@ clk_reset = 0;
 reset <= 1; PS2_DAT = 1; 
 
 # 22 reset <= 0;
+
+	#5 PS2_DAT <= 0;//Inicio
+	#10 PS2_DAT <= 1;
+	#10 PS2_DAT <= 0;
+	#10 PS2_DAT <= 0;
+	#10 PS2_DAT <= 1;
+	#10 PS2_DAT <= 0;
+	#10 PS2_DAT <= 1;
+	#10 PS2_DAT <= 0;
+	#10 PS2_DAT <= 0;
+	#10 PS2_DAT <= 1;//Paridad
+	#10 PS2_DAT <= 1;//Final
+
 end
 // generate clock to sequence tests
 always

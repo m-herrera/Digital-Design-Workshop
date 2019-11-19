@@ -11,8 +11,14 @@ module ps2controller(input logic rst, read_ack, PS2_CLK, PS2_DAT,
 								
 	counter #(4) bitCounter(PS2_CLK, count_rst, count_enable, count);
 
-	always_ff @(negedge PS2_CLK)
+	always_ff @(negedge PS2_CLK, posedge read_ack)
 		begin
+			if(read_ack)
+				begin
+				count_rst <= 1;
+				received_data <= '0;
+				end
+			else begin 
 			if(rst)
 				begin
 				count_enable <= 0;
@@ -20,9 +26,8 @@ module ps2controller(input logic rst, read_ack, PS2_CLK, PS2_DAT,
 				received <= 0;
 				data <= '0;
 				end
-			if(read_ack)
-				received_data <= '0;
-			if(start_enable)
+			
+			else if(start_enable)
 				count_enable <= 1;
 			case(count)
 				4'd0:count_rst <= 0; //First bit
@@ -37,6 +42,7 @@ module ps2controller(input logic rst, read_ack, PS2_CLK, PS2_DAT,
 				4'd9:begin received<=1'b1; received_data <= data; end //Parity bit
 				4'd10:begin received <= 0; count_rst <= 1; count_enable <= 0; end //Ending bit
 			endcase
+			end
 		end
 		
 		
