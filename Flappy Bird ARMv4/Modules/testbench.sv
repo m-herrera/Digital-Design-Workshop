@@ -1,17 +1,23 @@
-`timescale 1 ps / 1 ps
+`timescale 1 ns / 1 ns
 
 
 module testbench();
-logic clk, reset, PS2_CLK, PS2_DAT;
+logic clk, reset, PS2_CLK, PS2_DAT, clk_reset;
 logic hsync, vsync, blank, sync, vga_clk; 
 logic[7:0] vga_r, vga_g, vga_b;
 
 // instantiate device to be tested
-top dut(clk, reset, PS2_CLK, PS2_DAT, hsync, vsync, blank, sync, vga_clk, vga_r, vga_g, vga_b);
+top dut(clk, reset, PS2_CLK, PS2_DAT, clk_reset, hsync, vsync, blank, sync, vga_clk, vga_r, vga_g, vga_b);
 // initialize test
 initial
 begin
+clk_reset = 0;
+#5;
+clk_reset = 1;
+#20;
+clk_reset = 0;
 reset <= 1; PS2_DAT = 1; 
+
 # 22 reset <= 0;
 end
 // generate clock to sequence tests

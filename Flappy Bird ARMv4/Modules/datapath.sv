@@ -34,5 +34,5 @@ extend ext(Instr[23:0], ImmSrc, ExtImm); // extiende el inmediato segun la instr
 
 
 mux2 #(32) srcbmux(WriteData, ExtImm, ALUSrc, SrcB);//selecciona el source
-arithmetic_logic_unit #(32) alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags[0],ALUFlags[1],ALUFlags[2],ALUFlags[3]);//ALU
+arithmetic_logic_unit #(32) alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags[3],ALUFlags[2],ALUFlags[1],ALUFlags[0]);//ALU
 endmodule

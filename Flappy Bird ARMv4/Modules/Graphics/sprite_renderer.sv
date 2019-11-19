@@ -1,6 +1,6 @@
 module sprite_renderer(input logic clk, rst,
-					   input logic[9:0] pixelx, pixely,
-					   input logic[9:0] posx1, posy1, posx2, posy2, posx3, posy3, posx4, posy4, posx5, posy5, 
+					   input logic[10:0] pixelx, pixely,
+					   input logic[10:0] posx1, posy1, posx2, posy2, posx3, posy3, posx4, posy4, posx5, posy5, 
 					   output logic[23:0] out_color);
 
 

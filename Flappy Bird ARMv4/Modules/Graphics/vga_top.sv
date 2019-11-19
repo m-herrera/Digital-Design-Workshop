@@ -1,5 +1,5 @@
 module vga_top(input clk, rst, rst_clk,
-			   input logic[9:0] posx1, posy1, posx2, posy2, posx3, posy3, posx4, posy4, posx5, posy5, 
+			   input logic[10:0] posx1, posy1, posx2, posy2, posx3, posy3, posx4, posy4, posx5, posy5, 
 			   output logic hsync, vsync, blank, sync, vga_clk,
 			   output logic[7:0] vga_r, vga_g, vga_b);
 
@@ -10,7 +10,7 @@ module vga_top(input clk, rst, rst_clk,
 	assign vga_clk = clk_25;
 
 
-	logic[9:0] pixelx, pixely;
+	logic[10:0] pixelx, pixely;
 	synchronizer Sync(clk_25, rst, pixelx, pixely, hsync, vsync, blank, sync);
 
 
