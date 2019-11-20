@@ -15,7 +15,6 @@ module ps2controller(input logic rst, read_ack, PS2_CLK, PS2_DAT,
 		begin
 			if(read_ack)
 				begin
-				count_rst <= 1;
 				received_data <= '0;
 				end
 			else begin 
