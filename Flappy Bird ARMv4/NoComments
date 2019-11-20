@@ -6,19 +6,19 @@ RESET:		ADD		R2, R0, #128
 			STR		R3, [R1, #8]
 			ADD		R4, R0, #500
 			STR		R4, [R1, #12]
-			ADD		R5, R0, #308
+			ADD		R5, R0, #264
 			STR		R5, [R1, #16]
 			ADD		R4, R0, #900
 			STR		R4, [R1, #20]
-			ADD		R5, R0, #348
+			ADD		R5, R0, #400
 			STR		R5, [R1, #24]
 			ADD		R4, R0, #500
 			STR		R4, [R1, #28]
-			ADD		R5, R0, #-70
+			ADD		R5, R0, #-130
 			STR		R5, [R1, #32]
 			ADD		R4, R0, #900
 			STR		R4, [R1, #36]
-			ADD		R5, R0, #-50
+			ADD		R5, R0, #-5
 			STR		R5, [R1, #40]
 			ADD		R12, R0, #0
 			
@@ -32,10 +32,10 @@ RESET:		ADD		R2, R0, #128
 			BNE		JUMP
 			LDR		R4, [R1, #0]
 			
-			SUBS		R4, R4, #0x29
+			SUBS		R4, R4, #0x1D
 			BNE		DISMINUIR
 			STR		R4, [R1, #0]
-			ADD		R12, R12, #20
+			ADD		R12, R12, #30
 			
 			
 			JUMP:	SUB		R12, R12, #2
@@ -77,6 +77,12 @@ RESET:		ADD		R2, R0, #128
 			
 			
 			COLISION:	
+			SUBS		R5, R3, #0
+			BLT		RESET
+
+			SUBS		R5, R3, #416
+			BGT		RESET
+			
 			LDR		R10, [R1, #12]
 			LDR		R9, [R1, #16]
 			ADD		LR, PC, #0
